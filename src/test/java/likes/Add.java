@@ -8,7 +8,6 @@ import com.vk.api.sdk.objects.likes.Type;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static utils.PropertyLoader.loadProperty;
 import static utils.UserProvider.getDefaultUser;
 import static utils.VkClient.getVkApiClient;
 
@@ -37,7 +36,7 @@ public class Add {
         int errorCode = 0;
         try { vk.likes()
                 .add(actor, Type.PHOTO, 666)
-                .ownerId(Integer.valueOf(loadProperty("PrivateOwner.id")))
+                .ownerId(2)
                 .execute();}
         catch(ApiException ex) {
             errorCode = ex.getCode();

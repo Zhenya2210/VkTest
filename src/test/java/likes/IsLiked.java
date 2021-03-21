@@ -10,7 +10,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static utils.PropertyLoader.loadProperty;
 import static utils.UserProvider.getDefaultUser;
 import static utils.VkClient.getVkApiClient;
 
@@ -29,10 +28,8 @@ public class IsLiked {
     @DataProvider
     public Object[][] dataCorrectPrivateItems() {
         return new Object[][] {
-                new Object[] {getDefaultUser(), Integer.valueOf(loadProperty("PrivateOwner.id")),
-                        Type.PHOTO, 88},
-                new Object[] {getDefaultUser(), Integer.valueOf(loadProperty("PrivateOwner.id")),
-                        Type.PHOTO, 99}
+                new Object[] {getDefaultUser(), 2, Type.PHOTO, 88},
+                new Object[] {getDefaultUser(), 2, Type.PHOTO, 99}
         };
     }
 
