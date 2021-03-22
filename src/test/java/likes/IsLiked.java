@@ -51,7 +51,7 @@ public class IsLiked {
                .isLiked(actor, type, itemId)
                .execute();
        boolean actualResult = isLikedResponse.isLiked();
-       assertEquals(actualResult, expectedResult);
+       assertEquals(actualResult, expectedResult, String.format("Значение флага isLiked [%s] не равно ожидаемому [%s]", actualResult, expectedResult));
     }
 
 

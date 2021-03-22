@@ -51,15 +51,18 @@ public class GetList {
 
     @Test(groups = {"smoke", "negative"})
     public void returnAllUsersCopiesItemFromAnotherUser() throws ClientException, ApiException {
-        int quantityUsers = vk.likes()
+        int errorCode = 0;
+        try {
+            vk.likes()
                 .getList(privateActor, newPost.getType())
                 .itemId(newPost.getPostId())
                 .ownerId(publicActor.getId())
                 .filter(LikesFilter.COPIES)
-                .execute()
-                .getCount();
+                .execute();}
+        catch (ApiException ex) {
+            errorCode = ex.getCode();
+        }
 
-        assertEquals(quantityUsers, 0, String.format("Количество пользователей [%s] не соответствует ожидаемому [%s].", quantityUsers, 0));
-        //Или если тут должен быть exception вместо 0, то обработать его
+        assertEquals(errorCode, 15, String.format("Значение кода ошибки [%s] не равно ожидаемому [%s]", errorCode, 15));
     }
 }
