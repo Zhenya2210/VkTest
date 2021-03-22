@@ -4,28 +4,33 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.objects.likes.Type;
+import entities.items.PostMessage;
 import org.testng.annotations.Test;
+import service.PostMessageProvider;
 
 import static org.testng.Assert.assertEquals;
-import static utils.UserProvider.getDefaultUser;
+import static utils.UserProvider.getPrivateDefaultUser;
+import static utils.UserProvider.getPublicDefaultUser;
 import static utils.VkClient.getVkApiClient;
 
 public class Delete {
 
     private static VkApiClient vk = getVkApiClient();
-    private static UserActor actor = getDefaultUser();
+    private static UserActor publicActor = getPublicDefaultUser();
+    private static UserActor privateActor = getPrivateDefaultUser();
 
 
     @Test(groups = {"smoke", "positive"})
-    public void deleteLikeFromOwnPhoto() throws ClientException, ApiException {
+    public void deleteLikeFromOwnPost() throws ClientException, ApiException {
+        PostMessage newPost = new PostMessageProvider().getItemByUser(publicActor);
+
         int quantityBeforeDelete = vk.likes()
-                .add(actor, Type.PHOTO, 123456)
+                .add(publicActor, newPost.getType(), newPost.getPostId())
                 .execute()
                 .getLikes();
 
         int quantityAfterDelete = vk.likes()
-                .delete(actor, Type.PHOTO, 123456)
+                .delete(publicActor, newPost.getType(), newPost.getPostId())
                 .execute()
                 .getLikes();
 
@@ -34,18 +39,25 @@ public class Delete {
 
 
     @Test(groups = {"smoke", "negative"})
-    public void doubleDeleteLikeFromOwnPhoto() throws ClientException, ApiException {
+    public void doubleDeleteLikeFromOwnPost() throws ClientException, ApiException {
+        PostMessage newPost = new PostMessageProvider().getItemByUser(publicActor);
+
         vk.likes()
-                .add(actor, Type.PHOTO, 654321)
+                .add(publicActor, newPost.getType(), newPost.getPostId())
+                .execute();
+
+        vk.likes()
+                .add(privateActor, newPost.getType(), newPost.getPostId())
+                .ownerId(publicActor.getId())
                 .execute();
 
         int quantityAfterFirstDelete = vk.likes()
-                .delete(actor, Type.PHOTO, 654321)
+                .delete(publicActor, newPost.getType(), newPost.getPostId())
                 .execute()
                 .getLikes();
 
         int quantityAfterSecondDelete = vk.likes()
-                .delete(actor, Type.PHOTO, 654321)
+                .delete(publicActor, newPost.getType(), newPost.getPostId())
                 .execute()
                 .getLikes();
 

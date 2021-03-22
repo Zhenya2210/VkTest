@@ -8,7 +8,11 @@ public class UserProvider {
 
     private UserProvider() {}
 
-    public static UserActor getDefaultUser() {
-        return new UserActor(Integer.valueOf(loadProperty("User.id")), loadProperty("User.access_token"));
+    public static UserActor getPublicDefaultUser() {
+        return new UserActor(Integer.valueOf(loadProperty("PublicUser.id")), loadProperty("PublicUser.access_token"));
+    }
+
+    public static UserActor getPrivateDefaultUser() {
+        return new UserActor(Integer.valueOf(loadProperty("PrivateUser.id")), loadProperty("PrivateUser.access_token"));
     }
 }
