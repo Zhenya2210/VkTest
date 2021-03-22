@@ -21,7 +21,7 @@ public class Add {
 
     @Test(groups = {"smoke", "positive"})
     public void addLikeForOwnPost() throws ClientException, ApiException {
-        PostMessage newPost = new PostMessageProvider().getItemByActor(publicActor);
+        PostMessage newPost = new PostMessageProvider().getItemByUser(publicActor);
 
         int quantityAfterAdd = vk.likes()
                 .add(publicActor, newPost.getType(), newPost.getPostId())
@@ -33,7 +33,7 @@ public class Add {
 
     @Test(groups = {"smoke", "negative"})
     public void addLikeForPrivatePost() throws ClientException, ApiException {
-        PostMessage newPost = new PostMessageProvider().getItemByActor(privateActor);
+        PostMessage newPost = new PostMessageProvider().getItemByUser(privateActor);
         int errorCode = 0;
         try {
             vk.likes()

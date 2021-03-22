@@ -7,5 +7,5 @@ import entities.items.Likeable;
 
 public interface ItemProvider {
 
-    Likeable getItemByActor(UserActor userActor) throws ClientException, ApiException;
+    Likeable getItemByUser(UserActor userActor) throws ClientException, ApiException;
 }

@@ -14,7 +14,7 @@ public class PostMessageProvider implements ItemProvider {
     private static VkApiClient vk = getVkApiClient();
 
     @Override
-    public PostMessage getItemByActor(UserActor creator) throws ClientException, ApiException {
+    public PostMessage getItemByUser(UserActor creator) throws ClientException, ApiException {
         PostResponse postResponse = vk.wall()
                 .post(creator)
                 .message("Hello world")

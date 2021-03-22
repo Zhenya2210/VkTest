@@ -26,7 +26,7 @@ public class GetList {
 
     @BeforeClass
     private void createNewPost() throws ClientException, ApiException {
-        newPost = new PostMessageProvider().getItemByActor(publicActor);
+        newPost = new PostMessageProvider().getItemByUser(publicActor);
 
         vk.likes()
                 .add(publicActor, newPost.getType(), newPost.getPostId())
