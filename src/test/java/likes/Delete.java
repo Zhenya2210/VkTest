@@ -22,7 +22,7 @@ public class Delete {
 
     @Test(groups = {"smoke", "positive"})
     public void deleteLikeFromOwnPost() throws ClientException, ApiException {
-        PostMessage newPost = new PostMessageProvider().getItemByUser(publicActor);
+        PostMessage newPost = new PostMessageProvider().getItemByActor(publicActor);
 
         vk.likes()
                 .add(publicActor, newPost.getType(), newPost.getPostId())
@@ -40,7 +40,7 @@ public class Delete {
 
     @Test(groups = {"smoke", "negative"})
     public void doubleDeleteLikeFromOwnPost() throws ClientException, ApiException {
-        PostMessage newPost = new PostMessageProvider().getItemByUser(publicActor);
+        PostMessage newPost = new PostMessageProvider().getItemByActor(publicActor);
 
         vk.likes()
                 .add(publicActor, newPost.getType(), newPost.getPostId())

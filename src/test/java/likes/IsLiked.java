@@ -24,8 +24,8 @@ public class IsLiked {
 
     @DataProvider
     public Object[][] dataCorrectItems() throws ClientException, ApiException {
-        PostMessage newPostFirst = new PostMessageProvider().getItemByUser(publicActor);
-        PostMessage newPostSecond = new PostMessageProvider().getItemByUser(publicActor);
+        PostMessage newPostFirst = new PostMessageProvider().getItemByActor(publicActor);
+        PostMessage newPostSecond = new PostMessageProvider().getItemByActor(publicActor);
         vk.likes()
                 .add(publicActor, newPostFirst.getType(), newPostFirst.getPostId())
                 .execute();
@@ -38,7 +38,7 @@ public class IsLiked {
 
     @DataProvider
     public Object[][] dataCorrectPrivateItems() throws ClientException, ApiException {
-        PostMessage newPost = new PostMessageProvider().getItemByUser(privateActor);
+        PostMessage newPost = new PostMessageProvider().getItemByActor(privateActor);
 
         return new Object[][] {
                 new Object[] {publicActor, privateActor.getId(), newPost.getType(), newPost.getPostId()}
