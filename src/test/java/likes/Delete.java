@@ -24,7 +24,7 @@ public class Delete {
     public void deleteLikeFromOwnPost() throws ClientException, ApiException {
         PostMessage newPost = new PostMessageProvider().getItemByUser(publicActor);
 
-        int quantityBeforeDelete = vk.likes()
+        vk.likes()
                 .add(publicActor, newPost.getType(), newPost.getPostId())
                 .execute()
                 .getLikes();
@@ -34,7 +34,7 @@ public class Delete {
                 .execute()
                 .getLikes();
 
-        assertEquals(quantityAfterDelete, quantityBeforeDelete - 1, String.format("Количество лайков [%s] не равно ожидаемому результату [%s]", quantityAfterDelete, quantityBeforeDelete - 1));
+        assertEquals(quantityAfterDelete, 0, String.format("Количество лайков [%s] не равно ожидаемому результату [%s]", quantityAfterDelete, 0));
     }
 
 

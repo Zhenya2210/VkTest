@@ -58,10 +58,12 @@ public class IsLiked {
     @Test(dataProvider = "dataCorrectPrivateItems", groups = {"smoke", "negative"})
     public void privateItems(UserActor actor, int ownerId, Type type, int itemId) throws ClientException {
        int errorCode = 0;
-       try { vk.likes()
+       try {
+           vk.likes()
                 .isLiked(actor, type, itemId)
                 .ownerId(ownerId)
-                .execute();}
+                .execute();
+       }
        catch(ApiException ex) {
            errorCode = ex.getCode();
        }

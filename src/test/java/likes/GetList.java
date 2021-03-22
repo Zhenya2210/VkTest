@@ -58,7 +58,8 @@ public class GetList {
                 .itemId(newPost.getPostId())
                 .ownerId(publicActor.getId())
                 .filter(LikesFilter.COPIES)
-                .execute();}
+                .execute();
+        }
         catch (ApiException ex) {
             errorCode = ex.getCode();
         }

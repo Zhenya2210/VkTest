@@ -34,12 +34,13 @@ public class Add {
     @Test(groups = {"smoke", "negative"})
     public void addLikeForPrivatePost() throws ClientException, ApiException {
         PostMessage newPost = new PostMessageProvider().getItemByUser(privateActor);
-
         int errorCode = 0;
-        try { vk.likes()
+        try {
+            vk.likes()
                 .add(publicActor, newPost.getType(), newPost.getPostId())
                 .ownerId(privateActor.getId())
-                .execute();}
+                .execute();
+        }
         catch(ApiException ex) {
             errorCode = ex.getCode();
         }
