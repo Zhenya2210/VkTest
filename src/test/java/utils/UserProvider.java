@@ -6,13 +6,22 @@ import static utils.PropertyLoader.loadProperty;
 
 public class UserProvider {
 
+    private static UserActor publicDefaultUser = null;
+    private static UserActor privateDefaultUser = null;
+
     private UserProvider() {}
 
     public static UserActor getPublicDefaultUser() {
-        return new UserActor(Integer.valueOf(loadProperty("PublicUser.id")), loadProperty("PublicUser.access_token"));
+        if (publicDefaultUser == null) {
+            publicDefaultUser = new UserActor(Integer.valueOf(loadProperty("PublicUser.id")), loadProperty("PublicUser.access_token"));
+        }
+        return publicDefaultUser;
     }
 
     public static UserActor getPrivateDefaultUser() {
-        return new UserActor(Integer.valueOf(loadProperty("PrivateUser.id")), loadProperty("PrivateUser.access_token"));
+        if (privateDefaultUser == null) {
+            return new UserActor(Integer.valueOf(loadProperty("PrivateUser.id")), loadProperty("PrivateUser.access_token"));
+        }
+        return privateDefaultUser;
     }
 }

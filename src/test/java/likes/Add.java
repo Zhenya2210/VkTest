@@ -15,11 +15,11 @@ import static utils.VkClient.getVkApiClient;
 
 public class Add {
 
-    private static VkApiClient vk = getVkApiClient();
-    private static UserActor publicActor = getPublicDefaultUser();
-    private static UserActor privateActor = getPrivateDefaultUser();
+    private final VkApiClient vk = getVkApiClient();
+    private final UserActor publicActor = getPublicDefaultUser();
+    private final UserActor privateActor = getPrivateDefaultUser();
 
-    @Test(groups = {"smoke", "positive"})
+    @Test(groups = {"smoke", "positive"}, description = "Добавление лайка на свой пост.")
     public void addLikeForOwnPost() throws ClientException, ApiException {
         PostMessage newPost = new PostMessageProvider().getItemByUser(publicActor);
 
@@ -31,7 +31,7 @@ public class Add {
         assertEquals(quantityAfterAdd, 1, String.format("Количество лайков [%s] не равно ожидаемому результату [%s]", quantityAfterAdd, 1));
     }
 
-    @Test(groups = {"smoke", "negative"})
+    @Test(groups = {"smoke", "negative"}, description = "Добавление лайка на пост приватной страницы.")
     public void addLikeForPrivatePost() throws ClientException, ApiException {
         PostMessage newPost = new PostMessageProvider().getItemByUser(privateActor);
         int errorCode = 0;

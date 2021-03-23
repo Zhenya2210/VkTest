@@ -11,7 +11,7 @@ import static utils.VkClient.getVkApiClient;
 
 public class PostMessageProvider implements ItemProvider {
 
-    private static VkApiClient vk = getVkApiClient();
+    private final VkApiClient vk = getVkApiClient();
 
     @Override
     public PostMessage getItemByUser(UserActor creator) throws ClientException, ApiException {

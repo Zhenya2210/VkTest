@@ -19,13 +19,13 @@ import static utils.VkClient.getVkApiClient;
 
 public class GetList {
 
-    private static VkApiClient vk = getVkApiClient();
-    private static UserActor publicActor = getPublicDefaultUser();
-    private static UserActor privateActor = getPrivateDefaultUser();
-    private static PostMessage newPost;
+    private final VkApiClient vk = getVkApiClient();
+    private final UserActor publicActor = getPublicDefaultUser();
+    private final UserActor privateActor = getPrivateDefaultUser();
+    private PostMessage newPost;
 
     @BeforeClass
-    private void createNewPost() throws ClientException, ApiException {
+    private void createPost() throws ClientException, ApiException {
         newPost = new PostMessageProvider().getItemByUser(publicActor);
 
         vk.likes()

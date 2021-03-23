@@ -15,9 +15,9 @@ import static utils.VkClient.getVkApiClient;
 
 public class Delete {
 
-    private static VkApiClient vk = getVkApiClient();
-    private static UserActor publicActor = getPublicDefaultUser();
-    private static UserActor privateActor = getPrivateDefaultUser();
+    private final VkApiClient vk = getVkApiClient();
+    private final UserActor publicActor = getPublicDefaultUser();
+    private final UserActor privateActor = getPrivateDefaultUser();
 
 
     @Test(groups = {"smoke", "positive"})
